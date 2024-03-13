@@ -1,19 +1,24 @@
-const handleSubmit = (e) => {
-  e.preventDefault()
-  console.log("submit", e)
-}
-const myUlList = document.getElementById("finalList")
-const function1 = function () {
-  const myInput = document.getElementById("toDoList")
-  const myData = {
-    inserisciLista: myInput.value,
+const input = document.getElementById("input-box")
+const button = document.getElementById("addButton")
+const finalList = document.getElementById("list-container")
+
+button.onclick = function () {
+  const inputText = input.value
+  if (inputText !== "") {
+    let elementLi = document.createElement("li")
+    elementLi.innerText = inputText
+    elementLi.addEventListener("click", function () {
+      elementLi.classList.toggle("checked")
+    })
+    const listButton = document.createElement("button")
+    listButton.innerText = "x"
+    listButton.addEventListener("click", function () {
+      finalList.removeChild(elementLi)
+    })
+    elementLi.appendChild(listButton)
+    finalList.appendChild(elementLi)
+    input.value = ""
+  } else {
+    alert("scrivi qualcosa dannazione!")
   }
-  const li = document.createElement("li")
-  li.innerText = myData
-  li.addEventListener("click", function2)
-  myUlList.appendChild(li)
-  myInput.value = ""
-  console.log(myUlList)
 }
-const form = document.getElementById("myForm")
-form.addEventListener("submit", handleSubmit)
